@@ -27,7 +27,15 @@ class PreloaderScene extends Phaser.Scene {
     this.load.image('box', 'src/assets/images/grey_box.png');
     this.load.image('checkedBox', 'src/assets/images/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['src/assets/audio/TownTheme.mp3']);
-    //   this.load.image('phaserLogo', 'assets/logo.png');
+     this.load.image('sky', 'src/assets/images/sky.png');
+     this.load.image('tileset', 'src/assets/images/fantasy-tileset.png');
+    this.load.image('platform', 'src/assets/images/platform.png');
+    this.load.image('star', 'src/assets/images/star.png');
+    this.load.image('bomb', 'src/assets/images/bomb.png');
+    this.load.spritesheet('hero', 
+        'src/assets/images/character.png',
+        { frameWidth: 32, frameHeight: 48 }
+    );
 
     // display progress bar
     const progressBar = this.add.graphics();

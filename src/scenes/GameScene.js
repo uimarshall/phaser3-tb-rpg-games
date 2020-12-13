@@ -7,11 +7,12 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     // load images
-    this.load.image('logo', 'src/assets/images/logo.png');
+    // this.load.image('logo', 'src/assets/images/logo.png');
   }
 
   create() {
-    this.add.image(400, 300, 'logo');
+    this.add.image(400, 300, 'sky');
+    // this.add.spritesheet(400, 300, 'tileset');
   }
 }
 
