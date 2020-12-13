@@ -1,6 +1,6 @@
 import './main.scss';
 
-import config from './app/config';
+
 import Game from './app/app';
 
 
