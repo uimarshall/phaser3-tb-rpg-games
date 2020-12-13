@@ -1,16 +1,17 @@
+import Phaser from 'phaser';
 class GameScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Game');
   }
- 
- preload () {
+
+  preload() {
     // load images
     this.load.image('logo', 'src/assets/images/logo.png');
   }
- 
-  create () {
+
+  create() {
     this.add.image(400, 300, 'logo');
   }
-};
+}
 
-export default  GameScene
+export default GameScene;

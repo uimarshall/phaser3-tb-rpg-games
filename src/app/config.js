@@ -7,8 +7,6 @@ import PreloaderScene from '../scenes/PreloaderScene';
 import TitleScene from '../scenes/TitleScene';
 
 
-
-
 // Scenes
 const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene];
 
@@ -17,8 +15,8 @@ const config = {
   parent: 'phaser-app',
   title: 'Treasure of condor',
   url: '',
-  width: 360,
-  height: 640,
+  width: 800,
+  height: 600,
   scene: scenes,
   zoom: 2,
   pixelArt: true,
