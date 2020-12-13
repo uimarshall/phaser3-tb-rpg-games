@@ -14,6 +14,7 @@ class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
+      this.scene.start('Credits');
   this.readyCount++;
   if (this.readyCount === 2) {
     this.scene.start('Title');
@@ -25,6 +26,9 @@ class PreloaderScene extends Phaser.Scene {
   // load assets needed in our game
   this.load.image('blueButton1', 'src/assets/images/blue_btn02.png');
   this.load.image('blueButton2', 'src/assets/images/blue_btn03.png');
+  this.load.image('box', 'src/assets/images/grey_box.png');
+this.load.image('checkedBox', 'src/assets/images/blue_boxCheckmark.png');
+this.load.audio('bgMusic', ['src/assets/audio/TownTheme.mp3']);
 //   this.load.image('phaserLogo', 'assets/logo.png');  
 
     // display progress bar

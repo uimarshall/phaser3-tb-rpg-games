@@ -3,13 +3,13 @@ class GameScene extends Phaser.Scene {
     super('Game');
   }
  
-  preload () {
+ preload () {
     // load images
-    
+    this.load.image('logo', 'src/assets/images/logo.png');
   }
  
   create () {
-    
+    this.add.image(400, 300, 'logo');
   }
 };
 
