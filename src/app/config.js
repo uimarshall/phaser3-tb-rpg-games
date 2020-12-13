@@ -1,8 +1,16 @@
 import Phaser from 'phaser';
+import BootScene from '../scenes/BootScene';
+import CreditsScene from '../scenes/CreditsScene';
+import GameScene from '../scenes/GameScene';
+import OptionsScene from '../scenes/OptionsScene';
+import PreloaderScene from '../scenes/PreloaderScene';
+import TitleScene from '../scenes/TitleScene';
+
+
 
 
 // Scenes
-const scenes = [BootScene, Preloader, Menu, GameScene];
+const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene];
 
 const config = {
   type: Phaser.AUTO,
