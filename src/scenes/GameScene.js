@@ -5,6 +5,7 @@ class GameScene extends Phaser.Scene {
     super('Game');
     this.score = 0
     this.gameOver=false
+   
   }
 
   preload() {
@@ -13,7 +14,8 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 300, 'sky');
+    const sky= this.add.image(400, 300, 'sky');
+    sky.setOrigin(0.5)
     // this.add.spritesheet(400, 300, 'tileset');
     this.createPlatforms();
     this.createPlayer();
@@ -21,7 +23,13 @@ class GameScene extends Phaser.Scene {
     this.createStars()
     this.createBombs()
 
-    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    this.scoreText = this.add.text(64, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+    this.gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '32px', fill: '#000' });
+    this.startAgainText = this.add.text(400, 400, 'Click To Start', { fontSize: '32px', fill: 'yellow' });
+    this.gameOverText.setOrigin(0.5)
+    this.gameOverText.visible=false
+    this.startAgainText.setOrigin(0.5)
+    this.startAgainText.visible=false
   }
 
   createPlatforms() {
@@ -127,6 +135,16 @@ this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     player.anims.play('turn');
 
     this.gameOver = true;
+
+    // Show game over text
+    this.gameOverText.visible=true
+     this.startAgainText.visible=true
+    this.input.on('pointerdown',()=>{this.restartGame()})
+}
+
+restartGame(){
+  this.scene.start('Preloader')
+ 
 }
 
   // Update loop
