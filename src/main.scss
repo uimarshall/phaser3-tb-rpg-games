@@ -1,21 +1,21 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-	// margin: 0;
-	// overflow: hidden;
-	background-color: black;
+  // margin: 0;
+  // overflow: hidden;
+  background-color: black;
 }
 
 #phaser-app {
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	align-self: flex-start;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
 }
 
 canvas {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
