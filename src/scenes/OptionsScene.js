@@ -6,8 +6,9 @@ class OptionsScene extends Phaser.Scene {
 
 
   create() {
-    this.musicOn = true;
-    this.soundOn = true;
+    // this.musicOn = true;
+    // this.soundOn = true;
+    this.model = this.sys.game.globals.model;
 
     this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });
     this.musicButton = this.add.image(200, 200, 'checkedBox');
@@ -20,12 +21,14 @@ class OptionsScene extends Phaser.Scene {
     this.soundButton.setInteractive();
 
     this.musicButton.on('pointerdown', () => {
-      this.musicOn = !this.musicOn;
+      // this.musicOn = !this.musicOn;
+      this.model.musicOn = !this.model.musicOn;
       this.updateAudio();
     });
 
     this.soundButton.on('pointerdown', () => {
-      this.soundOn = !this.soundOn;
+      // this.soundOn = !this.soundOn;
+      this.model.soundOn = !this.model.soundOn;
       this.updateAudio();
     });
 
@@ -47,13 +50,13 @@ this.menuButton.on('pointerdown', function (pointer) {
   }
 
   updateAudio() {
-  if (this.musicOn === false) {
+  if (this.model.musicOn === false ) {
     this.musicButton.setTexture('box');
   } else {
     this.musicButton.setTexture('checkedBox');
   }
  
-  if (this.soundOn === false) {
+  if (this.model.soundOn === false) {
     this.soundButton.setTexture('box');
   } else {
     this.soundButton.setTexture('checkedBox');
