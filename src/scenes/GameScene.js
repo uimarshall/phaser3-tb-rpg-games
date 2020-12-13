@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
+    this.score = 0
   }
 
   preload() {
@@ -17,6 +18,8 @@ class GameScene extends Phaser.Scene {
     this.createPlayer();
     this.createCursors();
     this.createStars()
+
+    this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
   }
 
   createPlatforms() {
@@ -84,6 +87,8 @@ this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
    collectStar (player, star)
 {
     star.disableBody(true, true);
+    this.score += 10;
+    this.scoreText.setText('Score: ' + this.score);
 }
 
   // Update loop
