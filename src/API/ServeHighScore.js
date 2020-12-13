@@ -15,12 +15,12 @@ const getScores = async () => {
   } catch (e) {
     return e;
   }
-}
+};
 
 const sortScores = async (arr) => {
   const data = await arr.sort((a, b) => b.score - a.score);
   return data;
-}
+};
 
 const renderScores = async () => {
   const scores = await getScores();
@@ -39,6 +39,6 @@ const renderScores = async () => {
     tr.appendChild(scoreCell);
     table.appendChild(tr);
   }
-}
+};
 
 export { renderScores, getScores, sortScores };

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
 import BootScene from '../scenes/BootScene';
 import CreditsScene from '../scenes/CreditsScene';

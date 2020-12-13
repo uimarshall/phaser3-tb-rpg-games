@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { renderScores } from '../API/ServeHighScore';
-import Button from '../Objects/Buttons';
+import Button from '../helpers/Button';
+
 
 export default class HighScoreScene extends Phaser.Scene {
   constructor() {

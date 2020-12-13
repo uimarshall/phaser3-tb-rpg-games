@@ -1,35 +1,31 @@
+/* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 
 class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
-    this.score = 0
-    this.gameOver=false
-   
+    this.score = 0;
+    this.gameOver = false;
   }
 
-  preload() {
-    // load images
-    // this.load.image('logo', 'src/assets/images/logo.png');
-  }
 
   create() {
-    const sky= this.add.image(400, 300, 'sky');
-    sky.setOrigin(0.5)
+    const sky = this.add.image(400, 300, 'sky');
+    sky.setOrigin(0.5);
     // this.add.spritesheet(400, 300, 'tileset');
     this.createPlatforms();
     this.createPlayer();
     this.createCursors();
-    this.createStars()
-    this.createBombs()
+    this.createStars();
+    this.createBombs();
 
     this.scoreText = this.add.text(64, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
     this.gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '32px', fill: '#000' });
     this.startAgainText = this.add.text(400, 400, 'Click To Start', { fontSize: '32px', fill: 'yellow' });
-    this.gameOverText.setOrigin(0.5)
-    this.gameOverText.visible=false
-    this.startAgainText.setOrigin(0.5)
-    this.startAgainText.visible=false
+    this.gameOverText.setOrigin(0.5);
+    this.gameOverText.visible = false;
+    this.startAgainText.setOrigin(0.5);
+    this.startAgainText.visible = false;
   }
 
   createPlatforms() {
@@ -76,58 +72,48 @@ class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
-  createStars(){
+  createStars() {
     this.stars = this.physics.add.group({
-    key: 'star',
-    repeat: 11,
-    setXY: { x: 12, y: 0, stepX: 70 }
-});
+      key: 'star',
+      repeat: 11,
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
 
-this.stars.children.iterate((child)=> {
-
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-
-});
-this.physics.add.collider(this.stars, this.platforms);
-this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
-
-
-
+    this.stars.children.iterate((child) => {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+    this.physics.add.collider(this.stars, this.platforms);
+    this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
   }
-   collectStar (player, star)
-{
+
+  collectStar(player, star) {
     star.disableBody(true, true);
     this.score += 10;
-    this.scoreText.setText('Score: ' + this.score);
+    this.scoreText.setText(`Score: ${this.score}`);
 
-     if (this.stars.countActive(true) === 0)
-    {
-        this.stars.children.iterate((child)=> {
+    if (this.stars.countActive(true) === 0) {
+      this.stars.children.iterate((child) => {
+        child.enableBody(true, child.x, 0, true, true);
+      });
 
-            child.enableBody(true, child.x, 0, true, true);
+      const x = (this.player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-        });
-
-        const x = (this.player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-        const bomb = this.bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
+      const bomb = this.bombs.create(x, 16, 'bomb');
+      bomb.setBounce(1);
+      bomb.setCollideWorldBounds(true);
+      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
     }
-}
+  }
 
-createBombs(){
-  this.bombs = this.physics.add.group();
+  createBombs() {
+    this.bombs = this.physics.add.group();
 
-this.physics.add.collider(this.bombs, this.platforms);
+    this.physics.add.collider(this.bombs, this.platforms);
 
-this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
-}
+    this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
+  }
 
- hitBomb (player, bomb)
-{
+  hitBomb(player, bomb) {
     this.physics.pause();
 
     player.setTint(0xff0000);
@@ -137,15 +123,14 @@ this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     this.gameOver = true;
 
     // Show game over text
-    this.gameOverText.visible=true
-     this.startAgainText.visible=true
-    this.input.on('pointerdown',()=>{this.restartGame()})
-}
+    this.gameOverText.visible = true;
+    this.startAgainText.visible = true;
+    this.input.on('pointerdown', () => { this.restartGame(); });
+  }
 
-restartGame(){
-  this.scene.start('Preloader')
- 
-}
+  restartGame() {
+    this.scene.start('Preloader');
+  }
 
   // Update loop
   update() {

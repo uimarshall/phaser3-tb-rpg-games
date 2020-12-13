@@ -10,11 +10,6 @@ class BootScene extends Phaser.Scene {
     this.CONFIG = this.sys.game.CONFIG;
   }
 
-  preload() {
-    
-  }
-
-
   create() {
     this.scene.start('Preloader');
   }

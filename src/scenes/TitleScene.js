@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
 import config from '../app/config';
 import Button from '../helpers/Button';
