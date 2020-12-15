@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 // The Scene that will start the game
 class BootScene extends Phaser.Scene {
   constructor() {
-    super({ key: 'BootScene', active: true });
+    super({ key: 'BootScene', active: false });
   }
 
   init() {

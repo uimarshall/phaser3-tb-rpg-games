@@ -9,6 +9,7 @@ class Game extends Phaser.Game {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };
+    this.scene.start('BootScene');
   }
 }
 

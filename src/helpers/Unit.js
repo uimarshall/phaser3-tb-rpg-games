@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 class Unit extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, frame, type, hp, damage) {
-    super(this,scene, x, y, texture, frame);
+    super(scene, x, y, texture, frame);
     this.type = type;
     // this.maxHp = this.hp = hp;
     this.maxHp = hp;

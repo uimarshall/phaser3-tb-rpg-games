@@ -9,147 +9,183 @@ class GameScene extends Phaser.Scene {
   }
 
 
-  create() {
-    const sky = this.add.image(400, 300, 'sky');
-    sky.setOrigin(0.5);
-    // this.add.spritesheet(400, 300, 'tileset');
-    this.createPlatforms();
-    this.createPlayer();
-    this.createCursors();
-    this.createStars();
-    this.createBombs();
+ create() {
+    //  create our world scene with the map we have loaded into memory in BootScene.
+    /* The first row creates a tileset image. The next two rows add the layers to the map.
+*two layers – the first one is called ‘Grass’ and contains only grass tiles,
+ * the second is ‘Obstacles’ and there are some trees on it.
+ * The method setCollisionByExclusion makes all tiles except the ones send, available for collision detection.
+ * Sending -1 in our case makes all tiles on this layer collidable. */
+    // this.map = this.add.tilemap(0, 0, config.width, config.height, 'map');
+    this.map = this.make.tilemap({ key: 'map' });
+    this.tiles = this.map.addTilesetImage('spritesheet', 'tiles');
 
-    this.scoreText = this.add.text(64, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
-    this.gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '32px', fill: '#000' });
-    this.startAgainText = this.add.text(400, 400, 'Click To Start', { fontSize: '32px', fill: 'yellow' });
-    this.gameOverText.setOrigin(0.5);
-    this.gameOverText.visible = false;
-    this.startAgainText.setOrigin(0.5);
-    this.startAgainText.visible = false;
-  }
+    this.grass = this.map.createStaticLayer('Grass', this.tiles, 0, 0);
+    this.obstacles = this.map.createStaticLayer('Obstacles', this.tiles, 0, 0);
+    this.obstacles.setCollisionByExclusion([-1]);
+    this.updateScore();
 
-  createPlatforms() {
-    this.platforms = this.physics.add.staticGroup();
+    const userName = this.add.text(
+      400,
+      8,
+      `Player:${this.sys.game.globals.model.userName}`,
+      {
+        fontSize: '26px',
+        color: '#fff',
+      },
+    );
+    userName.setScrollFactor(0);
 
-    this.platforms.create(400, 568, 'platform').setScale(2).refreshBody();
+    // Add  player sprite.
+    /** The first parameter is x coordinate, the second is y,
+ * the third is the image resource and the last is its frame. */
+    this.player = this.physics.add.sprite(50, 100, 'player', 6);
 
-    this.platforms.create(600, 400, 'platform');
-    this.platforms.create(50, 250, 'platform');
-    this.platforms.create(750, 220, 'platform');
-  }
-
-  createPlayer() {
-    this.player = this.physics.add.sprite(100, 450, 'hero');
-
-    this.player.setBounce(0.2);
+    // For moving on our world map we will use Phaser 3 Arcade physics.
+    // make the player stay within the borders of the map
+    this.physics.world.bounds.width = this.map.widthInPixels;
+    this.physics.world.bounds.height = this.map.heightInPixels;
     this.player.setCollideWorldBounds(true);
+    // this.physics.add.collider(this.player, this.obstacles);
 
-    // Add collision btw player and platforms
-    this.physics.add.collider(this.player, this.platforms);
+    // Move on the map
+    /* Its time to make the player sprite move on the map.
+We need to process the user input. For this game we will use the arrow keys.
+*/
+    this.cursors = this.input.keyboard.createCursorKeys();
 
+    // Make the camera follow the player's movt
+    /**
+ * The first row limits the camera to stay within the map boundaries.
+ * The second makes the camera follow the player.
+The third row this.cameras.main.roundPixels = true;
+is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
+ */
+    this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+    this.cameras.main.startFollow(this.player);
+    this.cameras.main.roundPixels = true;
+
+    const exit = this.add.zone(900, 960, 80, 80);
+    this.physics.world.enable(exit, 1);
+    this.physics.add.overlap(this.player, exit, this.onExit, false, this);
+
+
+    // Add Animations
+    //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('hero', { start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
       frameRate: 10,
       repeat: -1,
     });
 
-    this.anims.create({
-      key: 'turn',
-      frames: [{ key: 'hero', frame: 4 }],
-      frameRate: 20,
-    });
-
+    // animation with key 'right'
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('hero', { start: 5, end: 8 }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
       frameRate: 10,
       repeat: -1,
     });
-  }
-
-  createCursors() {
-    this.cursors = this.input.keyboard.createCursorKeys();
-  }
-
-  createStars() {
-    this.stars = this.physics.add.group({
-      key: 'star',
-      repeat: 11,
-      setXY: { x: 12, y: 0, stepX: 70 },
+    this.anims.create({
+      key: 'up',
+      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14] }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'down',
+      frames: this.anims.generateFrameNumbers('player', { frames: [0, 6, 0, 12] }),
+      frameRate: 10,
+      repeat: -1,
     });
 
-    this.stars.children.iterate((child) => {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    });
-    this.physics.add.collider(this.stars, this.platforms);
-    this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
-  }
+    // Add collision btw the player and obstacles
+    this.physics.add.collider(this.player, this.obstacles);
 
-  collectStar(player, star) {
-    star.disableBody(true, true);
-    this.score += 10;
-    this.scoreText.setText(`Score: ${this.score}`);
+    // Player meeting the enemy
 
-    if (this.stars.countActive(true) === 0) {
-      this.stars.children.iterate((child) => {
-        child.enableBody(true, child.x, 0, true, true);
-      });
+    /** For the enemies locations I’ve decided to use a group of zone objects
+    * (Phaser.GameObjects.Zone). When the player overlaps with such zone,
+* a battle will be initiated.Phaser.GameObjects.Zone is an invisible object,
+to be able to see it during development you can set debug: true like this: */
 
-      const x = (this.player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-      const bomb = this.bombs.create(x, 16, 'bomb');
-      bomb.setBounce(1);
-      bomb.setCollideWorldBounds(true);
-      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    // We create 30 zones
+    this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
+    for (let i = 0; i < 30; i++) {
+      const x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+      const y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+      // parameters are x, y, width, height
+      this.spawns.create(x, y, 20, 20);
     }
+
+  
+
+    // Make the player and zones interract
+    /** When the player overlaps with one of the zones,
+  * the onMeetEnemy method is called.  */
+    this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    this.sys.events.on('wake', this.wake, this);
   }
 
-  createBombs() {
-    this.bombs = this.physics.add.group();
-
-    this.physics.add.collider(this.bombs, this.platforms);
-
-    this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
+   updateScore() {
+    this.score = this.sys.game.globals.model.score;
+    this.scoreText = this.add.text(16, 8, `Score: ${this.score}`, {
+      fontSize: '26px',
+      fill: '#fff',
+      backgroundColor: '#000',
+    });
+    this.scoreText.setScrollFactor(0);
   }
 
-  hitBomb(player, bomb) {
-    this.physics.pause();
-
-    player.setTint(0xff0000);
-
-    player.anims.play('turn');
-
-    this.gameOver = true;
-
-    // Show game over text
-    this.gameOverText.visible = true;
-    this.startAgainText.visible = true;
-    this.input.on('pointerdown', () => { this.restartGame(); });
+  wake() {
+    this.cursors.left.reset();
+    this.cursors.right.reset();
+    this.cursors.up.reset();
+    this.cursors.down.reset();
   }
 
-  restartGame() {
-    this.scene.start('Preloader');
+  onMeetEnemy(player, zone) {
+    // we move the zone to some other location
+    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+
+    // shake the world
+    this.cameras.main.shake(300);
+
+    // start battle
+    // switch to BattleScene
+    this.scene.switch('BattleScene');
   }
 
-  // Update loop
-  update() {
+  //   Move the player with the physics engine
+  update(time, delta) {
+    this.player.body.setVelocity(0);
+
+    // Horizontal movement
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
+      this.player.body.setVelocityX(-80);
+    } else if (this.cursors.right.isDown) {
+      this.player.body.setVelocityX(80);
+    }
 
+    // Vertical movement
+    if (this.cursors.up.isDown) {
+      this.player.body.setVelocityY(-80);
+    } else if (this.cursors.down.isDown) {
+      this.player.body.setVelocityY(80);
+    }
+
+    // Add Animations
+    if (this.cursors.left.isDown) {
       this.player.anims.play('left', true);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
-
       this.player.anims.play('right', true);
+    } else if (this.cursors.up.isDown) {
+      this.player.anims.play('up', true);
+    } else if (this.cursors.down.isDown) {
+      this.player.anims.play('down', true);
     } else {
-      this.player.setVelocityX(0);
-
-      this.player.anims.play('turn');
-    }
-
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+      this.player.anims.stop();
     }
   }
 }

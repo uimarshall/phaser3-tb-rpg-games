@@ -24,8 +24,10 @@ class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-     this.add.image(400, 300, 'background');
-    this.add.image(400, 100, 'title');
+    //  this.add.image(400, 300, 'background');
+    // this.add.image(400, 100, 'title');
+    this.load.image('title', 'src/assets/images/title.png');
+    this.load.image('background', 'src/assets/images/forest.png');
     // load assets needed in our game
     this.load.image('blueButton1', 'src/assets/images/blue_btn02.png');
     this.load.image('blueButton2', 'src/assets/images/blue_btn03.png');
