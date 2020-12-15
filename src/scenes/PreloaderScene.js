@@ -15,28 +15,70 @@ class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start('Title');
-    this.readyCount++;
-    if (this.readyCount === 2) {
-      this.scene.start('Title');
-    }
+     this.scene.start('UserScene');
+    // this.scene.start('Title');
+    // this.readyCount++;
+    // if (this.readyCount === 2) {
+    //   this.scene.start('Title');
+    // }
   }
 
   preload() {
+     this.add.image(400, 300, 'background');
+    this.add.image(400, 100, 'title');
     // load assets needed in our game
     this.load.image('blueButton1', 'src/assets/images/blue_btn02.png');
     this.load.image('blueButton2', 'src/assets/images/blue_btn03.png');
     this.load.image('box', 'src/assets/images/grey_box.png');
     this.load.image('checkedBox', 'src/assets/images/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['src/assets/audio/TownTheme.mp3']);
-    this.load.image('sky', 'src/assets/images/sky1.png');
-    this.load.image('tileset', 'src/assets/images/fantasy-tileset.png');
-    this.load.image('platform', 'src/assets/images/platform.png');
-    this.load.image('star', 'src/assets/images/coins.png');
-    this.load.image('bomb', 'src/assets/images/bomb.png');
-    this.load.spritesheet('hero',
-      'src/assets/images/character.png',
-      { frameWidth: 32, frameHeight: 48 });
+
+     // map tiles
+    this.load.image('tiles', 'src/assets/map/spritesheet.png');
+
+    // map in json format
+    this.load.tilemapTiledJSON('map', 'src/assets/map/map.json');
+
+     this.load.image('guard1', 'assets/images/guard1.png');
+    this.load.image('guard2', 'assets/images/guard2.png');
+    this.load.image('guard3', 'assets/images/guard3.png');
+
+    // our two characters
+    this.load.spritesheet('player', 'src/assets/images/player.png', { frameWidth: 32, frameHeight: 32 });
+    
+    // this.load.image('sky', 'src/assets/images/sky1.png');
+    // this.load.image('tileset', 'src/assets/images/fantasy-tileset.png');
+    // this.load.image('platform', 'src/assets/images/platform.png');
+    // this.load.image('star', 'src/assets/images/coins.png');
+    // this.load.image('bomb', 'src/assets/images/bomb.png');
+    // this.load.spritesheet('hero',
+    //   'src/assets/images/character.png',
+    //   { frameWidth: 32, frameHeight: 48 });
+
+    
+   
+   
+    this.load.spritesheet('enemy', 'assets/images/enemy.png', {
+      frameWidth: 57,
+      frameHeight: 88,
+    });
+    this.load.spritesheet('enemy1', 'assets/images/enemy_1.png', {
+      frameWidth: 120,
+      frameHeight: 100,
+    });
+    this.load.spritesheet('mage1', 'assets/images/mage_1.png', {
+      frameWidth: 85,
+      frameHeight: 94,
+    });
+    this.load.spritesheet('mage2', 'assets/images/mage_2.png', {
+      frameWidth: 122,
+      frameHeight: 110,
+    });
+    this.load.spritesheet('mage3', 'assets/images/mage_3.png', {
+      frameWidth: 87,
+      frameHeight: 110,
+    });
+   
 
     // display progress bar
     const progressBar = this.add.graphics();
@@ -114,133 +156,7 @@ class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
 
-    // Load Background
-    //     this.bg = this.add.graphics({ x: 0, y: 0 });
-    //     this.bg.fillStyle('0xD6CDB0', 1);
-    //     this.bg.fillRect(0, 0, this.CONFIG.width, this.CONFIG.height);
-    //     // Create loading bar
-    //     this.createLoader();
-    //     this.load.setPath(`${this.URL}src/assets/images`);
-
-    //     // Spritesheets - include only key and file-name
-    //     this.load.spritesheet('tileset', 'fantasy-tileset.png', {
-    //       frameWidth: 32, // frame size
-    //       frameHeight: 32,
-    //       endFrame: 19,
-    //       margin: 2,
-    //       spacing: 4,
-    //     });
-    //     this.load.spritesheet('hero', 'hero.png', {
-    //       frameWidth: 32, // frame size
-    //       frameHeight: 32,
-    //       endFrame: 3,
-    //       margin: 2,
-    //       spacing: 4,
-    //     });
-    //     this.load.spritesheet('spider', 'spider.png', {
-    //       frameWidth: 32, // frame size
-    //       frameHeight: 32,
-    //       endFrame: 3,
-    //       margin: 2,
-    //       spacing: 4,
-    //     });
-
-    //     this.load.spritesheet('octo', 'Run.png', {
-    //       frameWidth: 32, // frame size
-    //       frameHeight: 32,
-    //       endFrame: 3,
-    //       margin: 2,
-    //       spacing: 4,
-    //     });
-    //   }
-
-
-    //   create() {
-    //     // Create sprite Animations
-    //     this.createAllAnims();
-
-
-    //     // Load Menu
-    //     this.time.addEvent({
-    //       delay: 2000,
-    //       callback: () => { this.scene.start('Menu'); },
-    //       callbackScope: this,
-
-
-    //     });
-    //   }
-
-    //   createLoader() {
-    //     // Title
-    //     this.title = new Title(this,
-    //       this.CONFIG.centerX,
-    //       75,
-    //       'Loading Game....',
-    //       'preload',
-    //       0.5);
-    //     // Progress text
-    //     this.txtProgress = new Title(
-    //       this,
-    //       this.CONFIG.centerX,
-    //       this.CONFIG.centerY - 5,
-    //       'Loading...',
-    //       { x: 0.5, y: 1 },
-
-    //     );
-    //     // Progress Bar
-    //     const x = 10;
-    //     const y = this.CONFIG.centerY + 5;
-    //     this.border = this.add.graphics({ x, y });
-
-    //     this.progress = this.add.graphics({ x, y });
-    //     // Callback
-    //     this.load.on('progress', this.onProgress, this);
-    //   }
-
-
-    //   onProgress(value) {
-    //     // Width of progress bar
-    //     const w = this.CONFIG.width - 2 * this.progress.x;
-    //     const h = 36;
-    //     this.progress.clear();
-    //     this.progress.fillStyle('0xFFFFFF', 1);
-    //     this.progress.fillRect(0, 0, w * value, h);
-    //     this.border.clear();
-    //     this.border.lineStyle(4, 0x2E67E3, 1);
-    //     this.border.strokeRect(0, 0, w * value, h);
-    //     // Percentage in progress text
-    //     this.txtProgress.setText(`${Math.round(value * 100)}%`);
-    //   }
-
-    //   // Create anims
-    //   createAllAnims() {
-    //     // Hero walking
-
-    //     this.anims.create({
-    //       key: 'hero-walk', // create animation named hero-walk
-    //       frames: this.anims.generateFrameNames('hero', { frames: [0, 1, 0, 2] }),
-    //       frameRate: 12,
-    //       repeat: -1, // -1 is for infinite loop
-
-    //     });
-    //     // Spider walking
-
-    //     this.anims.create({
-    //       key: 'spider-walk', // create animation named hero-walk
-    //       frames: this.anims.generateFrameNames('spider', { frames: [0, 1, 0, 2] }),
-    //       frameRate: 12,
-    //       repeat: -1, // -1 is for infinite loop
-
-    //     });
-    //     // Octo walking
-
-    //     this.anims.create({
-    //       key: 'octo-walk', // create animation named hero-walk
-    //       frames: this.anims.generateFrameNames('octo', { frames: [0, 1, 0, 2] }),
-    //       frameRate: 12,
-    //       repeat: -1, // -1 is for infinite loop
-
-    //     });
+   
   }
 }
 
