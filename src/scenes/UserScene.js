@@ -52,7 +52,7 @@ export default class UserScene extends Phaser.Scene {
       fontSize: '32px',
     });
 
-    const style = 'background: url(assets/images/btn_sm.png); width: 490px; height: 77px; border: none; font: 32px Georgia; color: #fff;';
+    const style = 'background: url(src/assets/images/btn_sm.png); width: 490px; height: 77px; border: none; font: 32px Georgia; color: #fff;';
     const btn = this.add.dom(390, 550, 'button', style, 'Play Now');
     btn.addListener('click');
 

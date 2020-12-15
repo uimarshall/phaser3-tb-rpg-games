@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-bitwise */
-import 'phaser';
+import Phaser from 'phaser';
 
 class PlayersHealthBar {
   constructor(scene, x, y) {
