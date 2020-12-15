@@ -1,15 +1,17 @@
 /* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
+import BattleScene from '../scenes/BattleScene';
 import BootScene from '../scenes/BootScene';
 import CreditsScene from '../scenes/CreditsScene';
 import GameScene from '../scenes/GameScene';
 import OptionsScene from '../scenes/OptionsScene';
 import PreloaderScene from '../scenes/PreloaderScene';
 import TitleScene from '../scenes/TitleScene';
+import UserScene from '../scenes/UserScene';
 
 
 // Scenes
-const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene];
+const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene,UserScene];
 
 const config = {
   type: Phaser.AUTO,
