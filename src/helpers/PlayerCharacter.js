@@ -10,7 +10,7 @@ class PlayerCharacter extends Unit {
     this.flipX = true;
     this.healthBar = new PlayersHealthBar(scene, x - 45, y + 30);
 
-    this.setScale(1);
+    this.setScale(2);
    
   }
 }

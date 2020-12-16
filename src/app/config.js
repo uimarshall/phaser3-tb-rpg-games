@@ -7,11 +7,12 @@ import GameScene from '../scenes/GameScene';
 import OptionsScene from '../scenes/OptionsScene';
 import PreloaderScene from '../scenes/PreloaderScene';
 import TitleScene from '../scenes/TitleScene';
+import UIScene from '../scenes/UIScene';
 import UserScene from '../scenes/UserScene';
 
 
 // Scenes
-const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene,UserScene];
+const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene,UserScene,UIScene];
 
 const config = {
   type: Phaser.AUTO,
@@ -27,7 +28,7 @@ const config = {
     default: 'arcade',
     arcade: {
       gravity: { y: 300 },
-      debug: false,
+      debug: true,
     },
   },
   scene: scenes,

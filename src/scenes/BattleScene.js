@@ -73,7 +73,7 @@ class BattleScene extends Phaser.Scene {
   // We need to add the wake function.
   // It will run the UIScene and will add a timed event to exit the BattleScene:
   wake() {
-    this.scene.run('UiScene');
+    this.scene.run('UIScene');
     this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
   }
 

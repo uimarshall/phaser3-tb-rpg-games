@@ -4,8 +4,7 @@ import Phaser from 'phaser';
 class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
-    this.score = 0;
-    this.gameOver = false;
+    
   }
 
 
@@ -39,14 +38,14 @@ class GameScene extends Phaser.Scene {
     // Add  player sprite.
     /** The first parameter is x coordinate, the second is y,
  * the third is the image resource and the last is its frame. */
-    this.player = this.physics.add.sprite(50, 100, 'player', 6);
+    this.player = this.physics.add.sprite(64, 64, 'player', 63);
 
     // For moving on our world map we will use Phaser 3 Arcade physics.
     // make the player stay within the borders of the map
     this.physics.world.bounds.width = this.map.widthInPixels;
     this.physics.world.bounds.height = this.map.heightInPixels;
     this.player.setCollideWorldBounds(true);
-    // this.physics.add.collider(this.player, this.obstacles);
+    this.physics.add.collider(this.player, this.obstacles);
 
     // Move on the map
     /* Its time to make the player sprite move on the map.
@@ -74,7 +73,7 @@ is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [69, 68, 69, 70] }),
       frameRate: 10,
       repeat: -1,
     });
@@ -82,25 +81,25 @@ is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
     // animation with key 'right'
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [69, 68, 69, 70] }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [65, 64, 65, 66] }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('player', { frames: [0, 6, 0, 12] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [62, 60, 62, 61] }),
       frameRate: 10,
       repeat: -1,
     });
 
     // Add collision btw the player and obstacles
-    this.physics.add.collider(this.player, this.obstacles);
+    // this.physics.add.collider(this.player, this.obstacles);
 
     // Player meeting the enemy
 
@@ -123,16 +122,47 @@ to be able to see it during development you can set debug: true like this: */
     // Make the player and zones interract
     /** When the player overlaps with one of the zones,
   * the onMeetEnemy method is called.  */
-    this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    // this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    // this.sys.events.on('wake', this.wake, this);
+
+     const dangerZones = [
+      [300, 64],
+      [600, 64],
+      [980, 640],
+      [480, 864],
+      [800, 768],
+      [832, 224],
+      [352, 288],
+      [256, 448],
+      [640, 672],
+      [768, 960],
+      [520, 390],
+      [440, 600],
+      [360, 740],
+    ];
+    dangerZones.forEach(([x, y]) => {
+      this.spawns.create(x, y, 96, 96);
+    });
+
+    this.physics.add.overlap(
+      this.player,
+      this.spawns,
+      this.onMeetEnemy,
+      false,
+      this,
+    );
+    // we listen for 'wake' event
     this.sys.events.on('wake', this.wake, this);
   }
+
+  
 
    updateScore() {
     this.score = this.sys.game.globals.model.score;
     this.scoreText = this.add.text(16, 8, `Score: ${this.score}`, {
       fontSize: '26px',
       fill: '#fff',
-      backgroundColor: '#000',
+      backgroundColor: 'yellow',
     });
     this.scoreText.setScrollFactor(0);
   }
@@ -142,12 +172,18 @@ to be able to see it during development you can set debug: true like this: */
     this.cursors.right.reset();
     this.cursors.up.reset();
     this.cursors.down.reset();
+     this.player.body.setVelocity(0);
+    this.player.anims.stop();
+    this.updateScore();
   }
 
   onMeetEnemy(player, zone) {
     // we move the zone to some other location
-    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+    // zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    // zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+     zone.destroy();
+    this.input.stopPropagation();
+    
 
     // shake the world
     this.cameras.main.shake(300);
@@ -157,8 +193,12 @@ to be able to see it during development you can set debug: true like this: */
     this.scene.switch('BattleScene');
   }
 
+  onExit() {
+    this.scene.start('Victory');
+  }
+
   //   Move the player with the physics engine
-  update(time, delta) {
+  update() {
     this.player.body.setVelocity(0);
 
     // Horizontal movement
@@ -167,7 +207,6 @@ to be able to see it during development you can set debug: true like this: */
     } else if (this.cursors.right.isDown) {
       this.player.body.setVelocityX(80);
     }
-
     // Vertical movement
     if (this.cursors.up.isDown) {
       this.player.body.setVelocityY(-80);
@@ -175,11 +214,13 @@ to be able to see it during development you can set debug: true like this: */
       this.player.body.setVelocityY(80);
     }
 
-    // Add Animations
+    // Update the animation last and give left/right animations precedence over up/down animations
     if (this.cursors.left.isDown) {
       this.player.anims.play('left', true);
+      this.player.flipX = true;
     } else if (this.cursors.right.isDown) {
       this.player.anims.play('right', true);
+      this.player.flipX = false;
     } else if (this.cursors.up.isDown) {
       this.player.anims.play('up', true);
     } else if (this.cursors.down.isDown) {
