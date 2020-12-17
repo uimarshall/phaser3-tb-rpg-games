@@ -8,7 +8,7 @@ class Message extends Phaser.GameObjects.Container {
     this.add(graphics);
     graphics.lineStyle(1, 0xffffff, 0.8);
     graphics.fillStyle(0x031f4c, 0.3);
-   graphics.strokeRect(80, 100, 320, 190);
+    graphics.strokeRect(80, 100, 320, 190);
     graphics.fillRect(80, 100, 320, 190);
     this.text = new Phaser.GameObjects.Text(scene, 0, 0, '', {
       color: '#ffffff', align: 'center', fontSize: 13, wordWrap: { width: 160, useAdvancedWrap: true },

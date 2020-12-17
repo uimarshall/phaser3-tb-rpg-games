@@ -12,7 +12,7 @@ import UserScene from '../scenes/UserScene';
 
 
 // Scenes
-const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene,UserScene,UIScene];
+const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene, UserScene, UIScene];
 
 const config = {
   type: Phaser.AUTO,
@@ -21,14 +21,14 @@ const config = {
   url: '',
   width: 800,
   height: 600,
-   dom: {
+  dom: {
     createContainer: true,
   },
   physics: {
     default: 'arcade',
     arcade: {
       gravity: { y: 300 },
-      debug: true,
+      debug: false,
     },
   },
   scene: scenes,

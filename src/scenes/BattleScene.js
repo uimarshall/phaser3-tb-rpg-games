@@ -34,10 +34,10 @@ class BattleScene extends Phaser.Scene {
     this.add.existing(warrior);
 
     // player character - guard
-     const knight = new PlayerCharacter(this, 630, 200, 'guard2', null, 'Knight', 145, 20);
+    const knight = new PlayerCharacter(this, 630, 200, 'guard2', null, 'Knight', 145, 20);
     this.add.existing(knight);
 
-   // player character - beast
+    // player character - beast
     const beast = new PlayerCharacter(this, 630, 340, 'guard3', null, 'Beast', 135, 30);
     this.add.existing(beast);
 
@@ -46,7 +46,7 @@ class BattleScene extends Phaser.Scene {
     const mage1 = new Enemy(this, 80, 200, 'mage1', null, 'Light Mage', 80, 15);
     const mage2 = new Enemy(this, 80, 310, 'mage2', null, 'Dark Mage', 100, 20);
     const mage3 = new Enemy(this, 210, 280, 'mage3', null, 'Super Mage', 120, 25);
- // array with enemies
+    // array with enemies
     this.allEnemies = [enemy2, mage1, mage2, enemy1, mage3];
 
     this.enemies = this.allEnemies.filter((enemy) => {
@@ -59,15 +59,14 @@ class BattleScene extends Phaser.Scene {
       this.enemies = [enemy2];
       this.add.existing(enemy2);
     }
-// array with heroes
+    // array with heroes
     this.heroes = [warrior, knight, beast];
-     // array with both parties, who will attack
+    // array with both parties, who will attack
     this.units = this.heroes.concat(this.enemies);
     this.units.forEach(unit => unit.healthBar.draw()); // add the healthbars
     this.index = -1; // currently active unit
-     // Run UI Scene at the same time
+    // Run UI Scene at the same time
     this.scene.run('UIScene');
-
   }
 
   // We need to add the wake function.
@@ -98,7 +97,7 @@ class BattleScene extends Phaser.Scene {
       if (this.heroes[i].living) gameOver = false;
     }
 
-     if (victory) {
+    if (victory) {
       return 'victory';
     }
     if (gameOver) {
@@ -118,8 +117,8 @@ class BattleScene extends Phaser.Scene {
       this.units[i].destroy();
     }
     this.units.length = 0;
-     this.index = -1;
-      if (result === 'gameOver') {
+    this.index = -1;
+    if (result === 'gameOver') {
       this.scene.stop('Game');
       this.scene.sleep('UIScene');
       this.scene.switch('GameOver');

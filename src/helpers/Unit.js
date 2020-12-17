@@ -32,7 +32,7 @@ class Unit extends Phaser.GameObjects.Sprite {
       this.living = false;
       this.visible = false;
       this.menuItem = null;
-       this.healthBar.rem();
+      this.healthBar.rem();
     }
   }
 

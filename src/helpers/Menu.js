@@ -4,7 +4,7 @@ import MenuItem from './MenuItem';
 
 class Menu extends Phaser.GameObjects.Container {
   constructor(x, y, scene, heroes) {
-    super(this,scene, x, y);
+    super(scene, x, y);
     this.menuItems = [];
     this.menuItemIndex = 0;
 

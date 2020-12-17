@@ -5,8 +5,6 @@ import HeroesMenu from '../helpers/HeroesMenu';
 import Message from '../helpers/Message';
 
 
-
-
 class UIScene extends Phaser.Scene {
   constructor() {
     super('UIScene');

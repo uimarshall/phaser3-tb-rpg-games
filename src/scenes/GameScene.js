@@ -4,11 +4,10 @@ import Phaser from 'phaser';
 class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
-    
   }
 
 
- create() {
+  create() {
     //  create our world scene with the map we have loaded into memory in BootScene.
     /* The first row creates a tileset image. The next two rows add the layers to the map.
 *two layers – the first one is called ‘Grass’ and contains only grass tiles,
@@ -117,7 +116,6 @@ to be able to see it during development you can set debug: true like this: */
       this.spawns.create(x, y, 20, 20);
     }
 
-  
 
     // Make the player and zones interract
     /** When the player overlaps with one of the zones,
@@ -125,7 +123,7 @@ to be able to see it during development you can set debug: true like this: */
     // this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
     // this.sys.events.on('wake', this.wake, this);
 
-     const dangerZones = [
+    const dangerZones = [
       [300, 64],
       [600, 64],
       [980, 640],
@@ -155,9 +153,8 @@ to be able to see it during development you can set debug: true like this: */
     this.sys.events.on('wake', this.wake, this);
   }
 
-  
 
-   updateScore() {
+  updateScore() {
     this.score = this.sys.game.globals.model.score;
     this.scoreText = this.add.text(16, 8, `Score: ${this.score}`, {
       fontSize: '26px',
@@ -172,7 +169,7 @@ to be able to see it during development you can set debug: true like this: */
     this.cursors.right.reset();
     this.cursors.up.reset();
     this.cursors.down.reset();
-     this.player.body.setVelocity(0);
+    this.player.body.setVelocity(0);
     this.player.anims.stop();
     this.updateScore();
   }
@@ -181,9 +178,9 @@ to be able to see it during development you can set debug: true like this: */
     // we move the zone to some other location
     // zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     // zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-     zone.destroy();
+    zone.destroy();
     this.input.stopPropagation();
-    
+
 
     // shake the world
     this.cameras.main.shake(300);

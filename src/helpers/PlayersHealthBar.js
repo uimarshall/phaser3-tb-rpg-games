@@ -13,7 +13,7 @@ class PlayersHealthBar {
   }
 
   decrease(amount) {
-    this.value = amount | 0; 
+    this.value = amount | 0;
     if (this.value < 0) {
       this.value = 0;
     }
@@ -43,4 +43,4 @@ class PlayersHealthBar {
   }
 }
 
-export default PlayersHealthBar
+export default PlayersHealthBar;

@@ -15,7 +15,7 @@ class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-     this.scene.start('UserScene');
+    this.scene.start('UserScene');
     // this.scene.start('Title');
     // this.readyCount++;
     // if (this.readyCount === 2) {
@@ -35,19 +35,19 @@ class PreloaderScene extends Phaser.Scene {
     this.load.image('checkedBox', 'src/assets/images/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['src/assets/audio/TownTheme.mp3']);
 
-     // map tiles
+    // map tiles
     this.load.image('tiles', 'src/assets/map/spritesheet.png');
 
     // map in json format
     this.load.tilemapTiledJSON('map', 'src/assets/map/map.json');
 
-     this.load.image('guard1', 'src/assets/images/guard1.png');
+    this.load.image('guard1', 'src/assets/images/guard1.png');
     this.load.image('guard2', 'src/assets/images/guard2.png');
     this.load.image('guard3', 'src/assets/images/guard3.png');
 
     // our two characters
     this.load.spritesheet('player', 'src/assets/images/player.png', { frameWidth: 32, frameHeight: 32 });
-    
+
     // this.load.image('sky', 'src/assets/images/sky1.png');
     // this.load.image('tileset', 'src/assets/images/fantasy-tileset.png');
     // this.load.image('platform', 'src/assets/images/platform.png');
@@ -57,9 +57,7 @@ class PreloaderScene extends Phaser.Scene {
     //   'src/assets/images/character.png',
     //   { frameWidth: 32, frameHeight: 48 });
 
-    
-   
-   
+
     this.load.spritesheet('enemy2', 'src/assets/images/enemy.png', {
       frameWidth: 57,
       frameHeight: 88,
@@ -80,7 +78,7 @@ class PreloaderScene extends Phaser.Scene {
       frameWidth: 87,
       frameHeight: 110,
     });
-   
+
 
     // display progress bar
     const progressBar = this.add.graphics();
@@ -156,9 +154,6 @@ class PreloaderScene extends Phaser.Scene {
     });
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
-
-
-   
   }
 }
 
