@@ -1,7 +1,16 @@
-{
+{"env": {
+        "test": {
+            "presets": [
+                [
+                    "@babel/preset-env"
+                ]
+            ]
+        }
+    },
     "presets": [
         [
-            "@babel/env",
+            "@babel/preset-env",
+            
             {
                 "targets": {
                     "browsers": [
@@ -11,6 +20,14 @@
                     ]
                 },
                 "modules": false
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "regenerator": true
             }
         ]
     ]
