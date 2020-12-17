@@ -10,10 +10,11 @@ import PreloaderScene from '../scenes/PreloaderScene';
 import TitleScene from '../scenes/TitleScene';
 import UIScene from '../scenes/UIScene';
 import UserScene from '../scenes/UserScene';
+import VictoryScene from '../scenes/VictoryScene';
 
 
 // Scenes
-const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene, UserScene, UIScene, LeaderBoardScene];
+const scenes = [BootScene, PreloaderScene, GameScene, TitleScene, OptionsScene, CreditsScene, BattleScene, UserScene, UIScene, LeaderBoardScene,VictoryScene];
 
 const config = {
   type: Phaser.AUTO,

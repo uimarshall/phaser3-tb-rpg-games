@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 class MenuItem extends Phaser.GameObjects.Text {
   constructor(x, y, text, scene) {
-    super(this, scene, x, y, text, {
+    super(scene, x, y, text, {
       color: '#ffffff', align: 'left', fontSize: 15, fontFamily: 'Georgia',
     });
   }
