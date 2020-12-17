@@ -1,33 +1,23 @@
 @import "~bootstrap/scss/bootstrap";
 
-// html,
-// body {
-// 	margin: 0;
-// 	height: 100%;
-// 	overflow: hidden;
-// }
-
+html,
 body {
-	height: 100%;
-	// overflow-y: hidden;
+	margin: 0;
+	height: 100vh;
+	// text-align: center;
+	font-size: 16px;
+	box-sizing: border-box;
 }
 
-// body {
-// 	display: flex;
-// 	flex-direction: column;
-// 	align-items: center;
-// 	background-color: #333;
-// 	justify-content: center;
-// 	// position: fixed;
-// 	// height: 100vh;
-// 	// overflow: hidden;
-// }
-
 #phaser-app {
-	overflow: auto;
-	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #333;
+	justify-content: center;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 
 // canvas {
