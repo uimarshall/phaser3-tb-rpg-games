@@ -36,7 +36,7 @@ class PreloaderScene extends Phaser.Scene {
     this.load.audio('bgMusic', ['src/assets/audio/TownTheme.mp3']);
 
     // map tiles
-    this.load.image('tiles', 'src/assets/map/spritesheet.png');
+    this.load.image('tiles', 'src/assets/map/cave.png');
 
     // map in json format
     this.load.tilemapTiledJSON('map', 'src/assets/map/map.json');

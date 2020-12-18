@@ -2,11 +2,15 @@
 
 html,
 body {
-	margin: 0;
-	height: 100vh;
-	// text-align: center;
-	font-size: 16px;
-	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #222;
+	// margin: 0;
+	// height: 100vh;
+	// // text-align: center;
+	// font-size: 16px;
+	// box-sizing: border-box;
 }
 
 #phaser-app {
@@ -20,10 +24,10 @@ body {
 	overflow: hidden;
 }
 
-// canvas {
-// 	width: 100%;
-// 	height: 100%;
-// }
+canvas {
+	width: 100%;
+	height: 100%;
+}
 
 // .overlay {
 // 	position: fixed;
