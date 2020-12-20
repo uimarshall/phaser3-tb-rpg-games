@@ -139,11 +139,6 @@ class PreloaderScene extends Phaser.Scene {
 
   ready() {
     this.scene.start('UserScene');
-    // this.scene.start('Title');
-    // this.readyCount++;
-    // if (this.readyCount === 2) {
-    //   this.scene.start('Title');
-    // }
   }
 }
 

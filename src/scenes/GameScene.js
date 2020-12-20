@@ -113,10 +113,7 @@ to be able to see it during development you can set debug: true like this: */
 
 
     // Make the player and zones interract
-    /** When the player overlaps with one of the zones,
-  * the onMeetEnemy method is called.  */
-    // this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
-    // this.sys.events.on('wake', this.wake, this);
+
 
     const dangerZones = [
       [300, 64],
@@ -171,8 +168,7 @@ to be able to see it during development you can set debug: true like this: */
 
   onMeetEnemy(player, zone) {
     // we move the zone to some other location
-    // zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-    // zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+
     zone.destroy();
     this.input.stopPropagation();
 

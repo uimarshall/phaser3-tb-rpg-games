@@ -64,21 +64,6 @@ class BattleScene extends Phaser.Scene {
     this.scene.run('UIScene');
   }
 
-  // We need to add the wake function.
-  // It will run the UIScene and will add a timed event to exit the BattleScene:
-  // wake() {
-  //   this.scene.run('UIScene');
-  //   this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
-  // }
-
-
-  // And BattleScene will control the UIScene.
-  // Lets see how to return back to the WorldScene.
-  // exitBattle() {
-  //   this.scene.sleep('UiScene');// make UiScene not active and not visible
-  //   this.scene.switch('WorldScene');
-  // }
-
 
   checkEndBattle() {
     let victory = true;

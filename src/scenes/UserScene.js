@@ -18,10 +18,9 @@ export default class UserScene extends Phaser.Scene {
     this.add.image(400, 100, 'title');
 
     // try to add the story
-    const story = ['Your league of spies just received an intel that the palace of Condor is about to be attacked by witches of Endor in 5 days. You have to be there to protect Condor.',
-      'The safe road will take you there in 7 days. By then the town will be lost. The only chance to make it on time is to pass through the dangerous Dark Forest.',
-      'Passing the forest is difficult and risky. Various monsters and reprobates are larking waiting to attack any trespassers.',
-      'Even you and your experienced fighters might not be able to accomplish that. The people of Condor are relying on you to save them. Do not fail your mission.'];
+    const story = ['Your league of spies just received an intel that the palace of Condor is about to be attacked by witches of Endor in 3 weeks. You have to be there to protect Condor.',
+
+      'The people of Condor are relying on you to save them. Do not fail your mission.'];
 
     const graphics = this.make.graphics();
 
