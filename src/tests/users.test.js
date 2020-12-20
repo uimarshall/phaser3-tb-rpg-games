@@ -1,5 +1,4 @@
-import Model from "../helpers/Model";
-
+import Model from '../helpers/Model';
 
 
 describe('The username should be set and read', () => {

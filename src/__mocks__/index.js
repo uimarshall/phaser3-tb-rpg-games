@@ -5,8 +5,6 @@ import config from '../app/config';
 import Model from '../helpers/Model';
 
 
-
-
 class Game extends Phaser.Game {
   constructor() {
     super(config);

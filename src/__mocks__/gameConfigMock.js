@@ -6,7 +6,6 @@ import CreditsScene from '../scenes/CreditsScene';
 import UIScene from '../scenes/UIScene';
 
 
-
 function setup() {
   const config = {
     type: Phaser.AUTO,
@@ -20,12 +19,12 @@ function setup() {
     physics: {
       default: 'arcade',
       arcade: {
-        gravity: { y: 0 },
+        gravity: { y: 10 },
         debug: true,
       },
     },
     scene: [
-     
+
       BattleScene,
       CreditsScene,
       UIScene,

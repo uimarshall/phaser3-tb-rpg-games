@@ -1,17 +1,18 @@
-
+import Phaser from 'phaser';
 import Menu from './Menu';
 
-class ActionsMenu extends Menu {
-  constructor(x, y, scene) {
-    super(x, y, scene);
-    this.addMenuItem('Attack');
-  }
+const ActionsMenu = new Phaser.Class({
+  Extends: Menu,
 
+  initialize: function ActionsMenu(x, y, scene) {
+    Menu.call(this, x, y, scene);
+    this.addMenuItem('Attack');
+  },
   confirm() {
-    // do something when the player selects an action
-    this.scene.events.emit('SelectEnemies');
-  }
-}
+    // we select an action and go to the next menu and choose from the enemies to apply the action
+    this.scene.events.emit('SelectedAction');
+  },
+});
 
 
 export default ActionsMenu;

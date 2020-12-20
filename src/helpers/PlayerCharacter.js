@@ -1,16 +1,17 @@
+import Phaser from 'phaser';
 import PlayersHealthBar from './PlayersHealthBar';
 import Unit from './Unit';
 
 
-class PlayerCharacter extends Unit {
-  constructor(scene, x, y, texture, frame, type, hp, damage) {
-    super(scene, x, y, texture, frame, type, hp, damage);
-    // flip the image so I don't have to edit it manually
+const PlayerCharacter = new Phaser.Class({
+  Extends: Unit,
+
+  initialize: function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage) {
+    Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
     this.flipX = true;
     this.healthBar = new PlayersHealthBar(scene, x - 45, y + 30);
+  },
+});
 
-    // this.setScale(2);
-  }
-}
 
 export default PlayerCharacter;

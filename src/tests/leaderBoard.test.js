@@ -1,5 +1,5 @@
-import { createGame, getScores, putScore } from "../API/leaderBoard";
-import "babel-polyfill"
+import { createGame, getScores, putScore } from '../API/leaderBoard';
+import 'babel-polyfill';
 
 
 describe('The scores should be written and read from the API', () => {
@@ -17,19 +17,18 @@ describe('The scores should be written and read from the API', () => {
 });
 
 
-
 describe('create a game with a valid name', () => {
-  it('create a game to if the name is valid', () =>{
-      createGame().then((data) => {
-    expect(data).toBeTruthy();
-  })
-  } );
+  it('create a game to if the name is valid', () => {
+    createGame().then((data) => {
+      expect(data).toBeTruthy();
+    });
+  });
 });
 
 describe('retrieve the score', () => {
   it('return the score if the app exists', () => {
-      getScores().then((data) => {
-    expect(typeof data).toBe('object');
-  })
+    getScores().then((data) => {
+      expect(typeof data).toBe('object');
+    });
   });
 });

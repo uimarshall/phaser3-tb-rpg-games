@@ -1,14 +1,9 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
-/* eslint-disable max-classes-per-file */
-/* eslint-disable no-use-before-define */
-
 import Phaser from 'phaser';
 import Enemy from '../helpers/Enemy';
 import PlayerCharacter from '../helpers/PlayerCharacter';
-// import PlayerCharacter from '../components/PlayerCharacter';
-// import Enemy from '../components/Enemy';
 
 
 class BattleScene extends Phaser.Scene {
@@ -20,29 +15,29 @@ class BattleScene extends Phaser.Scene {
     this.back = this.add.image(400, 300, 'background');
     this.startBattle();
     this.sys.events.on('wake', this.startBattle, this);
-    // change the background to green
-    // this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
-
-    // this.startBattle();
-    // const timeEvent = this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
-    // this.sys.events.on('wake', this.wake, this);
   }
 
   startBattle() {
     // player character - warrior
-    const warrior = new PlayerCharacter(this, 630, 60, 'guard1', null, 'Warrior', 140, 25);
+    const warrior = new PlayerCharacter(
+      this, 630, 60, 'guard1', null, 'Warrior', 140, 25,
+    );
     this.add.existing(warrior);
 
     // player character - guard
-    const knight = new PlayerCharacter(this, 630, 200, 'guard2', null, 'Knight', 145, 20);
+    const knight = new PlayerCharacter(
+      this, 630, 200, 'guard2', null, 'Knight', 145, 20,
+    );
     this.add.existing(knight);
 
     // player character - beast
-    const beast = new PlayerCharacter(this, 630, 340, 'guard3', null, 'Beast', 135, 30);
+    const beast = new PlayerCharacter(
+      this, 630, 340, 'guard3', null, 'Beast', 135, 30,
+    );
     this.add.existing(beast);
 
     const enemy1 = new Enemy(this, 220, 130, 'enemy1', null, 'Gnu Warrior', 170, 30);
-    const enemy2 = new Enemy(this, 80, 90, 'enemy', null, 'Andromalius', 60, 10);
+    const enemy2 = new Enemy(this, 80, 90, 'enemy2', null, 'Andromalius', 60, 10);
     const mage1 = new Enemy(this, 80, 200, 'mage1', null, 'Light Mage', 80, 15);
     const mage2 = new Enemy(this, 80, 310, 'mage2', null, 'Dark Mage', 100, 20);
     const mage3 = new Enemy(this, 210, 280, 'mage3', null, 'Super Mage', 120, 25);
@@ -71,10 +66,10 @@ class BattleScene extends Phaser.Scene {
 
   // We need to add the wake function.
   // It will run the UIScene and will add a timed event to exit the BattleScene:
-  wake() {
-    this.scene.run('UIScene');
-    this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
-  }
+  // wake() {
+  //   this.scene.run('UIScene');
+  //   this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
+  // }
 
 
   // And BattleScene will control the UIScene.
@@ -88,12 +83,12 @@ class BattleScene extends Phaser.Scene {
   checkEndBattle() {
     let victory = true;
     // if all enemies are dead we have victory
-    for (var i = 0; i < this.enemies.length; i++) {
+    for (let i = 0; i < this.enemies.length; i++) {
       if (this.enemies[i].living) victory = false;
     }
     let gameOver = true;
     // if all heroes are dead we have game over
-    for (var i = 0; i < this.heroes.length; i++) {
+    for (let i = 0; i < this.heroes.length; i++) {
       if (this.heroes[i].living) gameOver = false;
     }
 
@@ -107,7 +102,7 @@ class BattleScene extends Phaser.Scene {
   }
 
 
-  endBattle() {
+  endBattle(result) {
     this.updateScore(this.enemies.length, this.heroes.length);
     // clear state, remove sprites
     this.heroes.length = 0;
@@ -126,16 +121,6 @@ class BattleScene extends Phaser.Scene {
       this.scene.sleep('UIScene');
       this.scene.switch('Game');
     }
-    // sleep the UI
-    // this.scene.sleep('UIScene');
-    // return to WorldScene and sleep current BattleScene
-    // this.scene.switch('WorldScene');
-  }
-
-  updateScore(e, h) {
-    let { score } = this.sys.game.globals.model;
-    score += (e + h) * 10;
-    this.sys.game.globals.model.score = score;
   }
 
 
@@ -168,10 +153,16 @@ class BattleScene extends Phaser.Scene {
   }
 
   receivePlayerSelection(action, target) {
-    if (action == 'attack') {
+    if (action === 'attack') {
       this.units[this.index].attack(this.enemies[target]);
     }
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+  }
+
+  updateScore(e, h) {
+    let { score } = this.sys.game.globals.model;
+    score += (e + h) * 10;
+    this.sys.game.globals.model.score = score;
   }
 }
 

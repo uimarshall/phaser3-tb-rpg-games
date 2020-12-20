@@ -15,9 +15,9 @@ import VictoryScene from '../scenes/VictoryScene';
 
 
 // Scenes
-const scenes = [BootScene, PreloaderScene, GameScene, 
-  TitleScene, OptionsScene, CreditsScene, BattleScene, 
-  UserScene, UIScene, LeaderBoardScene,VictoryScene,GameOverScene];
+const scenes = [BootScene, PreloaderScene, GameScene, UIScene,
+  TitleScene, OptionsScene, CreditsScene, BattleScene,
+  UserScene, LeaderBoardScene, VictoryScene, GameOverScene];
 
 const config = {
   type: Phaser.AUTO,

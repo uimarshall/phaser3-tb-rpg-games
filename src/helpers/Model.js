@@ -1,4 +1,4 @@
-
+/* eslint-disable no-underscore-dangle */
 class Model {
   constructor() {
     this.soundOnPlay = true;
@@ -51,7 +51,6 @@ class Model {
   resetScore() {
     this._score = 0;
   }
-
 }
 
 export default Model;

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
 import { putScore } from '../API/leaderBoard';
 import config from '../app/config';

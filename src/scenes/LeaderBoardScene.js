@@ -1,10 +1,11 @@
+/* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
 import { getScores } from '../API/leaderBoard';
 import config from '../app/config';
 
 class LeaderBoardScene extends Phaser.Scene {
   constructor() {
-    super('LeaderBoard');
+    super('HighScore');
   }
 
   init() {
@@ -54,4 +55,4 @@ class LeaderBoardScene extends Phaser.Scene {
   }
 }
 
-export default  LeaderBoardScene
+export default LeaderBoardScene;

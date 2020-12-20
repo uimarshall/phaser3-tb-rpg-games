@@ -1,4 +1,4 @@
-import Model from "../helpers/Model";
+import Model from '../helpers/Model';
 
 describe('The scores should be set and read', () => {
   it('Should read the score', () => {

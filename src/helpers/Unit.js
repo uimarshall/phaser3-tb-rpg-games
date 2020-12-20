@@ -35,13 +35,6 @@ class Unit extends Phaser.GameObjects.Sprite {
       this.healthBar.rem();
     }
   }
-
-  //   Prevents bullet from falling off
-//   update() {
-//     if (this.y < 32) {
-//       this.destroy();
-//     }
-//   }
 }
 
 export default Unit;

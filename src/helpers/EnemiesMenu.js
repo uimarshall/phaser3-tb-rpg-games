@@ -1,16 +1,17 @@
-
+import Phaser from 'phaser';
 import Menu from './Menu';
 
-class EnemiesMenu extends Menu {
-  constructor(x, y, scene) {
-    super(x, y, scene);
-  }
+const EnemiesMenu = new Phaser.Class({
+  Extends: Menu,
 
+  initialize: function EnemiesMenu(x, y, scene) {
+    Menu.call(this, x, y, scene);
+  },
   confirm() {
-    // do something when the player selects an action
+    // the player has selected the enemy and we send its id with the event
     this.scene.events.emit('Enemy', this.menuItemIndex);
-  }
-}
+  },
+});
 
 
 export default EnemiesMenu;

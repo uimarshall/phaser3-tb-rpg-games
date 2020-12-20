@@ -1,8 +1,8 @@
+/* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
 
-import { putScore } from "../API/leaderBoard";
-import config from "../app/config";
-
+import { putScore } from '../API/leaderBoard';
+import config from '../app/config';
 
 
 class GameOverScene extends Phaser.Scene {
@@ -43,4 +43,4 @@ class GameOverScene extends Phaser.Scene {
   }
 }
 
-export default GameOverScene
+export default GameOverScene;

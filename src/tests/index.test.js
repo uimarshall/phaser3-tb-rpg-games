@@ -1,4 +1,4 @@
-import Game from "../__mocks__";
+import Game from '../__mocks__';
 
 window.game = new Game();
 

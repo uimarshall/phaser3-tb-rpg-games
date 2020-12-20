@@ -1,4 +1,5 @@
-/* eslint-disable no-unused-vars */
+
+/* eslint-disable no-plusplus */
 import Phaser from 'phaser';
 
 class GameScene extends Phaser.Scene {
@@ -8,13 +9,6 @@ class GameScene extends Phaser.Scene {
 
 
   create() {
-    //  create our world scene with the map we have loaded into memory in BootScene.
-    /* The first row creates a tileset image. The next two rows add the layers to the map.
-*two layers – the first one is called ‘Grass’ and contains only grass tiles,
- * the second is ‘Obstacles’ and there are some trees on it.
- * The method setCollisionByExclusion makes all tiles except the ones send, available for collision detection.
- * Sending -1 in our case makes all tiles on this layer collidable. */
-    // this.map = this.add.tilemap(0, 0, config.width, config.height, 'map');
     this.map = this.make.tilemap({ key: 'map' });
     this.tiles = this.map.addTilesetImage('spritesheet', 'tiles');
 
@@ -69,7 +63,8 @@ is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
 
 
     // Add Animations
-    //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
+    //  animation with key 'left', we don't need left and right as we
+    // will use one and flip the sprite
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('player', { frames: [69, 68, 69, 70] }),

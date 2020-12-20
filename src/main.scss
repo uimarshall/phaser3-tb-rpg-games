@@ -2,48 +2,24 @@
 
 html,
 body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #222;
-	// margin: 0;
-	// height: 100vh;
-	// // text-align: center;
-	// font-size: 16px;
-	// box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222;
 }
 
 #phaser-app {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #333;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #333;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 canvas {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
-// .overlay {
-// 	position: fixed;
-// 	top: 0px;
-// 	left: 0px;
-// 	right: 0px;
-// 	bottom: 0px;
-// 	background-color: rgba(0, 0, 0, 0.8);
-
-// 	.overlay-content {
-// 		height: 100%;
-// 		overflow: scroll;
-// 	}
-// }
-
-// .background-content {
-// 	height: 100%;
-// 	overflow: auto;
-// }

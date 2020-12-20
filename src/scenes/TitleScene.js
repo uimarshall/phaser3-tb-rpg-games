@@ -11,7 +11,12 @@ class TitleScene extends Phaser.Scene {
 
 
   create() {
-  // Game
+    this.back = this.add.image(400, 300, 'background');
+    this.add.image(400, 100, 'title');
+    const user = this.sys.game.globals.model.userName;
+    this.add.text(config.width / 2, 20, `Welcome ${user}`).setOrigin(0.5, 0.5);
+
+    // Game
     this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
 
     // Options
@@ -19,6 +24,17 @@ class TitleScene extends Phaser.Scene {
 
     // Credits
     this.creditsButton = new Button(this, config.width / 2, config.height / 2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'Credits');
+
+    // LeaderBoard
+    this.gameButton = new Button(
+      this,
+      config.width / 2,
+      config.height / 2 + 200,
+      'blueButton1',
+      'blueButton2',
+      'HighScore',
+      'HighScore',
+    );
 
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {

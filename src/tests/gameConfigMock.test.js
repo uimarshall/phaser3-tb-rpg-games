@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import setup from "../__mocks__/gameConfigMock";
+import setup from '../__mocks__/gameConfigMock';
 
 
 describe('test the game creation configuration', () => {

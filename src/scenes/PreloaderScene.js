@@ -14,19 +14,9 @@ class PreloaderScene extends Phaser.Scene {
     this.CONFIG = this.sys.game.CONFIG;
   }
 
-  ready() {
-    this.scene.start('UserScene');
-    // this.scene.start('Title');
-    // this.readyCount++;
-    // if (this.readyCount === 2) {
-    //   this.scene.start('Title');
-    // }
-  }
 
   preload() {
-    //  this.add.image(400, 300, 'background');
-    // this.add.image(400, 100, 'title');
-    this.load.image('title', 'src/assets/images/title.png');
+    this.load.image('title', 'src/assets/images/logo.png');
     this.load.image('background', 'src/assets/images/forest.png');
     // load assets needed in our game
     this.load.image('blueButton1', 'src/assets/images/blue_btn02.png');
@@ -47,15 +37,6 @@ class PreloaderScene extends Phaser.Scene {
 
     // our two characters
     this.load.spritesheet('player', 'src/assets/images/player.png', { frameWidth: 32, frameHeight: 32 });
-
-    // this.load.image('sky', 'src/assets/images/sky1.png');
-    // this.load.image('tileset', 'src/assets/images/fantasy-tileset.png');
-    // this.load.image('platform', 'src/assets/images/platform.png');
-    // this.load.image('star', 'src/assets/images/coins.png');
-    // this.load.image('bomb', 'src/assets/images/bomb.png');
-    // this.load.spritesheet('hero',
-    //   'src/assets/images/character.png',
-    //   { frameWidth: 32, frameHeight: 48 });
 
 
     this.load.spritesheet('enemy2', 'src/assets/images/enemy.png', {
@@ -153,7 +134,16 @@ class PreloaderScene extends Phaser.Scene {
       this.ready();
     });
 
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
+    // this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
+  }
+
+  ready() {
+    this.scene.start('UserScene');
+    // this.scene.start('Title');
+    // this.readyCount++;
+    // if (this.readyCount === 2) {
+    //   this.scene.start('Title');
+    // }
   }
 }
 

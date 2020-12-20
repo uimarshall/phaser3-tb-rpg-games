@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable import/no-cycle */
 import Phaser from 'phaser';
 import config from '../app/config';
 
