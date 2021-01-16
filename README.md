@@ -54,7 +54,7 @@ You can navigate to `http://localhost:8080/` to see your application running<br>
 
 ## Game Instructions(How to play)
 
-Press the right or left keys on your computer to jump between platforms. As you collect more coins the number of bombs increases to make the game enter hard mode.
+Press the right or left arrow keyboard keys on your computer to jump between platforms. As you collect more coins the number of bombs increases to make the game enter hard mode.
 Collect coins to gain points. Avoid the firebombs. You risk losing the game.
 
 
