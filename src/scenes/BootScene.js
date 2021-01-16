@@ -1,18 +1,18 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 // The Scene that will start the game
 class BootScene extends Phaser.Scene {
-	constructor() {
-		super("BootScene");
-	}
+  constructor() {
+    super('BootScene');
+  }
 
-	init() {
-		this.URL = this.sys.game.URL;
-		this.CONFIG = this.sys.game.CONFIG;
-	}
+  init() {
+    this.URL = this.sys.game.URL;
+    this.CONFIG = this.sys.game.CONFIG;
+  }
 
-	create() {
-		this.scene.start("Preloader");
-	}
+  create() {
+    this.scene.start('Preloader');
+  }
 }
 
 export default BootScene;
