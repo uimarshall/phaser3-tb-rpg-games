@@ -310,38 +310,31 @@ class BattleScene extends Phaser.Scene {
 		// Run UI Scene at the same time
 		this.scene.run("UIScene");
 	}
+
 	nextTurn() {
-		// if we have victory or game over
 		if (this.checkEndBattle()) {
-			this.endBattle();
+			this.endBattle(this.checkEndBattle());
 			return;
 		}
 		do {
-			// currently active unit
-			this.index++;
-			// if there are no more units, we start again from the first one
+			this.index += 1;
 			if (this.index >= this.units.length) {
 				this.index = 0;
 			}
 		} while (!this.units[this.index].living);
-		// if its player hero
 		if (this.units[this.index] instanceof PlayerCharacter) {
-			// we need the player to select action and then enemy
 			this.events.emit("PlayerSelect", this.index);
 		} else {
-			// else if its enemy unit
-			// pick random living hero to be attacked
 			let r;
 			do {
 				r = Math.floor(Math.random() * this.heroes.length);
 			} while (!this.heroes[r].living);
-			// call the enemy's attack function
 			this.units[this.index].attack(this.heroes[r]);
 			const hero = this.heroes[r];
 			hero.healthBar.decrease(100 * (hero.hp / hero.maxHp));
-			// add timer for the next turn, so will have smooth gameplay
+
 			this.time.addEvent({
-				delay: 3000,
+				delay: 2300,
 				callback: this.nextTurn,
 				callbackScope: this,
 			});
@@ -400,7 +393,7 @@ class BattleScene extends Phaser.Scene {
 		} else if (result === "victory") {
 			this.scene.sleep("UIScene");
 			// return to GameScene and sleep current BattleScene
-			this.scene.switch("GameScene");
+			this.scene.switch("Game");
 		}
 	}
 	updateScore(e, h) {

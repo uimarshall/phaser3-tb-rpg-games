@@ -13,48 +13,48 @@ class PreloaderScene extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image("title", "src/assets/images/logo.png");
-		this.load.image("background", "src/assets/images/forest.png");
+		this.load.image("title", "assets/images/logo.png");
+		this.load.image("background", "assets/images/forest.png");
 		// load assets needed in our game
-		this.load.image("blueButton1", "src/assets/images/blue_btn02.png");
-		this.load.image("blueButton2", "src/assets/images/blue_btn03.png");
-		this.load.image("box", "src/assets/images/grey_box.png");
-		this.load.image("checkedBox", "src/assets/images/blue_boxCheckmark.png");
-		this.load.audio("bgMusic", ["src/assets/audio/TownTheme.mp3"]);
+		this.load.image("blueButton1", "assets/images/blue_btn02.png");
+		this.load.image("blueButton2", "assets/images/blue_btn03.png");
+		this.load.image("box", "assets/images/grey_box.png");
+		this.load.image("checkedBox", "assets/images/blue_boxCheckmark.png");
+		this.load.audio("bgMusic", ["assets/audio/TownTheme.mp3"]);
 
 		// map tiles
-		this.load.image("tiles", "src/assets/map/cave.png");
+		this.load.image("tiles", "assets/map/cave.png");
 
 		// map in json format
-		this.load.tilemapTiledJSON("map", "src/assets/map/map.json");
+		this.load.tilemapTiledJSON("map", "assets/map/map.json");
 
-		this.load.image("guard1", "src/assets/images/guard1.png");
-		this.load.image("guard2", "src/assets/images/guard2.png");
-		this.load.image("guard3", "src/assets/images/guard3.png");
+		this.load.image("guard1", "assets/images/guard1.png");
+		this.load.image("guard2", "assets/images/guard2.png");
+		this.load.image("guard3", "assets/images/guard3.png");
 
 		// our two characters
-		this.load.spritesheet("player", "src/assets/images/player.png", {
+		this.load.spritesheet("player", "assets/images/player.png", {
 			frameWidth: 32,
 			frameHeight: 32,
 		});
 
-		this.load.spritesheet("enemy2", "src/assets/images/enemy.png", {
+		this.load.spritesheet("enemy2", "assets/images/enemy.png", {
 			frameWidth: 57,
 			frameHeight: 88,
 		});
-		this.load.spritesheet("enemy1", "src/assets/images/enemy_1.png", {
+		this.load.spritesheet("enemy1", "assets/images/enemy_1.png", {
 			frameWidth: 120,
 			frameHeight: 100,
 		});
-		this.load.spritesheet("mage1", "src/assets/images/mage_1.png", {
+		this.load.spritesheet("mage1", "assets/images/mage_1.png", {
 			frameWidth: 85,
 			frameHeight: 94,
 		});
-		this.load.spritesheet("mage2", "src/assets/images/mage_2.png", {
+		this.load.spritesheet("mage2", "assets/images/mage_2.png", {
 			frameWidth: 122,
 			frameHeight: 110,
 		});
-		this.load.spritesheet("mage3", "src/assets/images/mage_3.png", {
+		this.load.spritesheet("mage3", "assets/images/mage_3.png", {
 			frameWidth: 87,
 			frameHeight: 110,
 		});
