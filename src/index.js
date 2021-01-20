@@ -1,6 +1,9 @@
 import './main.scss';
-import './app/app';
-import './app/alertService';
-import { render } from './app/componentService';
 
-render();
+
+import Game from './app/app';
+
+
+window.game = new Game();
+
+window.game.soundOn = true;

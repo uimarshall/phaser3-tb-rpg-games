@@ -1,16 +1,17 @@
-
 const path = require('path');
-// webpack-merge v5 (and later)
+
 const { merge } = require('webpack-merge');
-// const merge = require('webpack-merge');//Only worked in v4.
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
   mode: 'production',
-  // devtool: "none",
-  // entry: "./src/index.js",
+  devtool: false,
+
   output: {
     filename: '[name].[contentHash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -30,10 +31,25 @@ module.exports = merge(common, {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin({
-    filename: '[name].[contentHash].css',
-
-  }), new CleanWebpackPlugin()],
-
-
+  performance: {
+    maxEntrypointSize: 900000,
+    maxAssetSize: 900000,
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }),
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contentHash].css',
+    }),
+    new CleanWebpackPlugin(),
+  ],
 });
