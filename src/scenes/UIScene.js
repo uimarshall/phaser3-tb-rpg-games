@@ -13,7 +13,7 @@ class UIScene extends Phaser.Scene {
 		// draw some background for the menu
 		this.graphics = this.add.graphics();
 		this.graphics.lineStyle(1, 0xffffff);
-		this.graphics.fillStyle(0x031f4c, 1);
+		this.graphics.fillStyle(0xff00f2, 1);
 		this.graphics.strokeRect(2, 398, 282, 200);
 		this.graphics.fillRect(2, 398, 282, 200);
 		this.graphics.strokeRect(290, 398, 212, 200);

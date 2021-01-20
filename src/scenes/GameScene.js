@@ -44,12 +44,7 @@ We need to process the user input. For this game we will use the arrow keys.
 		this.cursors = this.input.keyboard.createCursorKeys();
 
 		// Make the camera follow the player's movt
-		/**
- * The first row limits the camera to stay within the map boundaries.
- * The second makes the camera follow the player.
-The third row this.cameras.main.roundPixels = true;
-is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
- */
+
 		this.cameras.main.setBounds(
 			0,
 			0,
@@ -64,8 +59,7 @@ is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
 		this.physics.add.overlap(this.player, exit, this.onExit, false, this);
 
 		// Add Animations
-		//  animation with key 'left', we don't need left and right as we
-		// will use one and flip the sprite
+
 		this.anims.create({
 			key: "left",
 			frames: this.anims.generateFrameNumbers("player", {
@@ -102,7 +96,6 @@ is a bit of a hack to prevent tiles bleeding – showing border lines on tiles.
 		});
 
 		// Add collision btw the player and obstacles
-		// this.physics.add.collider(this.player, this.obstacles);
 
 		// Player meeting the enemy
 
@@ -176,8 +169,6 @@ to be able to see it during development you can set debug: true like this: */
 
 	onMeetEnemy(player, zone) {
 		// we move the zone to some other location
-		// zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-		// zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
 		zone.destroy();
 		// shake the world

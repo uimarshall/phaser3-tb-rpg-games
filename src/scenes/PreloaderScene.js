@@ -131,8 +131,6 @@ class PreloaderScene extends Phaser.Scene {
 			assetText.destroy();
 			this.ready();
 		});
-
-		// this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 	}
 
 	ready() {
