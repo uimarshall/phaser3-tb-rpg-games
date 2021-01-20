@@ -4,7 +4,7 @@
 
 # Turn based RPG-game
 
-# This Project is turn based rpg game build using [phaser 3](https://phaser.io/phaser3/gettingstarted) for Microverse JavaScript capstone project. Phaser 3 is an open-source framework for Canvas and WebGL powered browser games. 
+This Project is turn based rpg game build using [phaser 3](https://phaser.io/phaser3/gettingstarted) for Microverse JavaScript capstone project. Phaser 3 is an open-source framework for Canvas and WebGL powered browser games. 
 
 ## Project Description
 
