@@ -1,3 +1,3 @@
-import "jest-canvas-mock";
+import 'jest-canvas-mock';
 
-require("jest-fetch-mock").enableMocks();
+require('jest-fetch-mock').enableMocks();
